@@ -1,7 +1,7 @@
 export default class ColumnChart {
     element;
     chartHeight = 50
-    
+
     constructor(props = {}) {
       const {data = [], label = '', value = 0, link = '', formatHeading = (value)=>value} = props;
       this.data = data;
@@ -34,7 +34,7 @@ export default class ColumnChart {
 
     createTemplate() {
       return `
-        <div class="column-chart" style="--chart-height: ${this.chartHeight}">
+        <div class="column-chart column-chart_loading "  style="--chart-height: ${this.chartHeight}">
       <div class="column-chart__title">
         ${this.createTitle()}
       </div>
@@ -51,14 +51,12 @@ export default class ColumnChart {
     createElement() {
       const element = document.createElement('div');
       element.innerHTML = this.createTemplate();
-      const elementFirstChild = element.firstElementChild;
-      elementFirstChild.classList.add('column-chart_loading');
-      return elementFirstChild;
+      return element.firstElementChild;
     }
 
     update(newData) {
       this.data = newData;
-      return this.createTemplate();
+      this.element.querySelector("[data-element='body']").innerHTML = this.createChartTemplate();
     }
 
     remove() {return this.element.remove();}
