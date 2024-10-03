@@ -11,7 +11,7 @@ export function trimSymbols(string, size) {
   let result = '';
   for (const symbol of string) {
     if (symbol !== prevSymbol) {
-        prevSymbol = symbol;
+      prevSymbol = symbol;
       count = 0;
     } 
     if (count < size && symbol === prevSymbol) {
